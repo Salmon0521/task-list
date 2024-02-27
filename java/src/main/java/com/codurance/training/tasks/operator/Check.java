@@ -7,11 +7,21 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-public class CheckTask implements Operator {
+public class Check implements Operator {
+    protected boolean checked;
+
+    public Check(String operatorName) {
+        if (operatorName.equals("check")) {
+            this.checked = true;
+        } else {
+            this.checked = false;
+        }
+    }
+
     @Override
     public void execute(String commandline, Map<String, List<Task>> tasks, PrintWriter out) {
         Command command = new Command(commandline);
-        setDone(command.getRest(), true, tasks, out);
+        setDone(command.getRest(), checked, tasks, out);
     }
 
     private void setDone(String idString, boolean done, Map<String, List<Task>> tasks, PrintWriter out) {

@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-public class ShowTask implements Operator{
+public class Show implements Operator{
     @Override
     public void execute(String commandline, Map<String, List<Task>> tasks, PrintWriter out) {
         show(tasks, out);
