@@ -47,26 +47,25 @@ public final class TaskList implements Runnable {
     }
 
     private void execute(String commandLine) {
-        String[] commandRest = commandLine.split(" ", 2);
-        String command = commandRest[0];
-        switch (command) {
+        Command command = new Command(commandLine);
+        switch (command.getCommand()) {
             case "show":
                 show();
                 break;
             case "add":
-                add(commandRest[1]);
+                add(command.getRest());
                 break;
             case "check":
-                check(commandRest[1]);
+                check(command.getRest());
                 break;
             case "uncheck":
-                uncheck(commandRest[1]);
+                uncheck(command.getRest());
                 break;
             case "help":
                 help();
                 break;
             default:
-                error(command);
+                error(command.getCommand());
                 break;
         }
     }
@@ -82,13 +81,12 @@ public final class TaskList implements Runnable {
     }
 
     private void add(String commandLine) {
-        String[] subcommandRest = commandLine.split(" ", 2);
-        String subcommand = subcommandRest[0];
-        if (subcommand.equals("project")) {
-            addProject(subcommandRest[1]);
-        } else if (subcommand.equals("task")) {
-            String[] projectTask = subcommandRest[1].split(" ", 2);
-            addTask(projectTask[0], projectTask[1]);
+        Command command = new Command(commandLine);
+        if (command.getCommand().equals("project")) {
+            addProject(command.getRest());
+        } else if (command.getCommand().equals("task")) {
+            Command subcommand = new Command(command.getRest());
+            addTask(subcommand.getCommand(), subcommand.getRest());
         }
     }
 
