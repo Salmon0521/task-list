@@ -1,10 +1,6 @@
 package com.codurance.training.tasks.command;
 
-import com.codurance.training.tasks.Task;
-
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
+import com.codurance.training.tasks.tasklist.TaskList;
 
 public class Error implements Command {
     private final String commandline;
@@ -14,13 +10,12 @@ public class Error implements Command {
     }
 
     @Override
-    public void execute(Map<String, List<Task>> tasks, PrintWriter out) {
-        error(out);
+    public String execute(TaskList taskList) {
+        return error();
     }
 
-    private void error(PrintWriter out) {
-        out.printf("I don't know what the command \"%s\" is.", commandline);
-        out.println();
+    private String error() {
+        return String.format("I don't know what the command \"%s\" is.", commandline) + System.lineSeparator();
     }
 
 }

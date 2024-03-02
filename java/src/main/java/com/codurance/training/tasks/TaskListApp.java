@@ -2,6 +2,7 @@ package com.codurance.training.tasks;
 
 import com.codurance.training.tasks.command.Command;
 import com.codurance.training.tasks.command.factory.CommandFactory;
+import com.codurance.training.tasks.tasklist.TaskList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,17 +32,24 @@ public final class TaskListApp implements Runnable {
         while (true) {
             out.print("> ");
             out.flush();
-            String commandline;
+            String command;
             try {
-                commandline = in.readLine();
+                command = in.readLine();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            if (commandline.equals(QUIT)) {
+            if (command.equals(QUIT)) {
                 break;
             }
-            Command command = commandFactory.createCommand(commandline);
-            command.execute(taskList.getTasks(), out);
+            execute(command);
+        }
+    }
+
+    private void execute(String commandline){
+        Command command = commandFactory.createCommand(commandline);
+        String errMsg = command.execute(taskList);
+        if (errMsg != null) {
+            out.print(errMsg);
         }
     }
 

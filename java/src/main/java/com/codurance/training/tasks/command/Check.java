@@ -1,39 +1,29 @@
 package com.codurance.training.tasks.command;
 
-import com.codurance.training.tasks.Task;
-
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
+import com.codurance.training.tasks.tasklist.TaskList;
 
 public class Check implements Command {
-    protected boolean checked;
+    protected boolean check;
     private final Integer id;
 
     public Check(String command, String idString) {
         this.id = Integer.parseInt(idString);
         if (command.equals("check")) {
-            this.checked = true;
+            this.check = true;
         } else {
-            this.checked = false;
+            this.check = false;
         }
     }
 
     @Override
-    public void execute(Map<String, List<Task>> tasks, PrintWriter out) {
-        setDone(checked, tasks, out);
+    public String execute(TaskList tasks) {
+        return taskCheck(tasks);
     }
 
-    private void setDone(boolean done, Map<String, List<Task>> tasks, PrintWriter out) {
-        for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
-            for (Task task : project.getValue()) {
-                if (task.getId() == id) {
-                    task.setDone(done);
-                    return;
-                }
-            }
+    private String taskCheck(TaskList taskList) {
+        if (! taskList.setTaskDone(id, check)) {
+            return String.format("Could not find a task with an ID of %d.", id) + System.lineSeparator();
         }
-        out.printf("Could not find a task with an ID of %d.", id);
-        out.println();
+        return null;
     }
 }

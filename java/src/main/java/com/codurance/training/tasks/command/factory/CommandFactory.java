@@ -1,11 +1,13 @@
 package com.codurance.training.tasks.command.factory;
 
-import com.codurance.training.tasks.TaskList;
-import com.codurance.training.tasks.command.*;
+import com.codurance.training.tasks.command.Add;
+import com.codurance.training.tasks.command.Check;
+import com.codurance.training.tasks.command.Help;
+import com.codurance.training.tasks.command.Show;
+import com.codurance.training.tasks.command.Command;
 import com.codurance.training.tasks.command.Error;
 
 public class CommandFactory {
-//    private static TaskList taskList = new TaskList();
 
     public Command createCommand(String commandline) {
         String[] commandRest = commandline.split(" ", 2);
