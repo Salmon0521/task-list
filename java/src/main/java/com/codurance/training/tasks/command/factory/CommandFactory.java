@@ -1,7 +1,10 @@
-package com.codurance.training.tasks.operator;
+package com.codurance.training.tasks.command.factory;
 
-public class OperatorFactory {
-    public Operator createOperator(String operatorName) {
+import com.codurance.training.tasks.command.*;
+import com.codurance.training.tasks.command.Error;
+
+public class CommandFactory {
+    public Command createOperator(String operatorName) {
         switch (operatorName) {
             case "show":
                 return new Show();

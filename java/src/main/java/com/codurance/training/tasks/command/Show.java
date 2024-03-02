@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.operator;
+package com.codurance.training.tasks.command;
 
 import com.codurance.training.tasks.Task;
 
@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-public class Show implements Operator{
+public class Show implements Command {
     @Override
     public void execute(String commandline, Map<String, List<Task>> tasks, PrintWriter out) {
         show(tasks, out);

@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.operator;
+package com.codurance.training.tasks.command;
 
 import com.codurance.training.tasks.Task;
 
@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-public interface Operator {
+public interface Command {
 
     void execute(String command, Map<String, List<Task>> tasks, PrintWriter out);
 }
