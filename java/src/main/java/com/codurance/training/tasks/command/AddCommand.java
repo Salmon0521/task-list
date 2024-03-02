@@ -7,7 +7,7 @@ import java.util.List;
 
 public class AddCommand implements Command {
     private final String type;
-    private String commandline;
+    private final String commandline;
 
     public AddCommand(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
