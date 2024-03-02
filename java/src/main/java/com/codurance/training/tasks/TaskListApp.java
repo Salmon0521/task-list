@@ -40,10 +40,8 @@ public final class TaskListApp implements Runnable {
             if (commandline.equals(QUIT)) {
                 break;
             }
-            String[] commandRest = commandline.split(" ", 2);
-            String command = commandRest[0];
-            Command command1 = commandFactory.createOperator(command);
-            command1.execute(commandline, taskList.getTasks(), out);
+            Command command = commandFactory.createCommand(commandline);
+            command.execute(taskList.getTasks(), out);
         }
     }
 

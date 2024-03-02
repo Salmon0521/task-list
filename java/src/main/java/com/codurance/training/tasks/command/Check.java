@@ -8,9 +8,11 @@ import java.util.Map;
 
 public class Check implements Command {
     protected boolean checked;
+    private final Integer id;
 
-    public Check(String operatorName) {
-        if (operatorName.equals("check")) {
+    public Check(String command, String idString) {
+        this.id = Integer.parseInt(idString);
+        if (command.equals("check")) {
             this.checked = true;
         } else {
             this.checked = false;
@@ -18,13 +20,11 @@ public class Check implements Command {
     }
 
     @Override
-    public void execute(String commandLine, Map<String, List<Task>> tasks, PrintWriter out) {
-        String[] commandRest = commandLine.split(" ", 2);
-        setDone(commandRest[1], checked, tasks, out);
+    public void execute(Map<String, List<Task>> tasks, PrintWriter out) {
+        setDone(checked, tasks, out);
     }
 
-    private void setDone(String idString, boolean done, Map<String, List<Task>> tasks, PrintWriter out) {
-        int id = Integer.parseInt(idString);
+    private void setDone(boolean done, Map<String, List<Task>> tasks, PrintWriter out) {
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             for (Task task : project.getValue()) {
                 if (task.getId() == id) {

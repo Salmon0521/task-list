@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Show implements Command {
     @Override
-    public void execute(String commandline, Map<String, List<Task>> tasks, PrintWriter out) {
+    public void execute(Map<String, List<Task>> tasks, PrintWriter out) {
         show(tasks, out);
     }
 

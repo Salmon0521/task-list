@@ -9,15 +9,18 @@ import java.util.Map;
 
 public class Add implements Command {
     private static long lastId = 0;
+    private final String commandLine;
 
-    @Override
-    public void execute(String commandLine, Map<String, List<Task>> tasks, PrintWriter out) {
-        String[] subcommandRest = commandLine.split(" ", 2);
-        String subcommand = subcommandRest[0];
-        addType(subcommandRest[1], tasks, out);
+    public Add(String commandLine) {
+        this.commandLine = commandLine;
     }
 
-    private void addType(String commandLine, Map<String, List<Task>> tasks, PrintWriter out) {
+    @Override
+    public void execute(Map<String, List<Task>> tasks, PrintWriter out) {
+        addType(tasks, out);
+    }
+
+    private void addType( Map<String, List<Task>> tasks, PrintWriter out) {
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {

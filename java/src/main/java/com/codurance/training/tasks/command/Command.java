@@ -8,5 +8,5 @@ import java.util.Map;
 
 public interface Command {
 
-    void execute(String command, Map<String, List<Task>> tasks, PrintWriter out);
+    void execute(Map<String, List<Task>> tasks, PrintWriter out);
 }
