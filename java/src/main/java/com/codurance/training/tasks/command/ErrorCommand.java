@@ -2,10 +2,10 @@ package com.codurance.training.tasks.command;
 
 import com.codurance.training.tasks.tasklist.TaskList;
 
-public class Error implements Command {
+public class ErrorCommand implements Command {
     private final String commandline;
 
-    public Error(String commandline) {
+    public ErrorCommand(String commandline) {
         this.commandline = commandline;
     }
 

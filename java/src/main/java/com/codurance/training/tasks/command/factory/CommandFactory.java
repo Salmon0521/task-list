@@ -1,11 +1,11 @@
 package com.codurance.training.tasks.command.factory;
 
-import com.codurance.training.tasks.command.Add;
-import com.codurance.training.tasks.command.Check;
-import com.codurance.training.tasks.command.Help;
-import com.codurance.training.tasks.command.Show;
+import com.codurance.training.tasks.command.AddCommand;
+import com.codurance.training.tasks.command.CheckCommand;
+import com.codurance.training.tasks.command.HelpCommand;
+import com.codurance.training.tasks.command.ShowCommand;
 import com.codurance.training.tasks.command.Command;
-import com.codurance.training.tasks.command.Error;
+import com.codurance.training.tasks.command.ErrorCommand;
 
 public class CommandFactory {
 
@@ -14,16 +14,16 @@ public class CommandFactory {
         String command = commandRest[0];
         switch (command) {
             case "show":
-                return new Show();
+                return new ShowCommand();
             case "add":
-                return new Add(commandRest[1]);
+                return new AddCommand(commandRest[1]);
             case "check":
             case "uncheck":
-                return new Check(command, commandRest[1]);
+                return new CheckCommand(command, commandRest[1]);
             case "help":
-                return new Help();
+                return new HelpCommand();
             default:
-                return new Error(command);
+                return new ErrorCommand(command);
         }
     }
 }

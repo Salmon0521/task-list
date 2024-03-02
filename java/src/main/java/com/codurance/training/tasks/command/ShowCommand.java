@@ -2,7 +2,7 @@ package com.codurance.training.tasks.command;
 
 import com.codurance.training.tasks.tasklist.TaskList;
 
-public class Show implements Command {
+public class ShowCommand implements Command {
     @Override
     public String execute(TaskList taskList) {
         return show(taskList);

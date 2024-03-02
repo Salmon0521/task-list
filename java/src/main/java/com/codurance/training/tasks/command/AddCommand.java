@@ -5,11 +5,11 @@ import com.codurance.training.tasks.tasklist.TaskList;
 
 import java.util.List;
 
-public class Add implements Command {
+public class AddCommand implements Command {
     private final String type;
     private String commandline;
 
-    public Add(String commandLine) {
+    public AddCommand(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
         this.type = command;

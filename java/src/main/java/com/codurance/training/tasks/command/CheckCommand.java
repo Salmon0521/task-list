@@ -2,11 +2,11 @@ package com.codurance.training.tasks.command;
 
 import com.codurance.training.tasks.tasklist.TaskList;
 
-public class Check implements Command {
+public class CheckCommand implements Command {
     protected boolean check;
     private final Integer id;
 
-    public Check(String command, String idString) {
+    public CheckCommand(String command, String idString) {
         this.id = Integer.parseInt(idString);
         if (command.equals("check")) {
             this.check = true;
