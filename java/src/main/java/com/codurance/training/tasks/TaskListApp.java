@@ -14,7 +14,6 @@ public final class TaskListApp implements Runnable {
     private static final String QUIT = "quit";
 
     private final TaskList taskList = new TaskList();
-    private final CommandFactory commandFactory = new CommandFactory();
     private final Input input;
     private final Output output;
 
@@ -41,7 +40,7 @@ public final class TaskListApp implements Runnable {
     }
 
     private void execute(String commandline){
-        Command command = commandFactory.createCommand(commandline);
+        Command command = CommandFactory.createCommand(commandline);
         String errMsg = command.execute(taskList);
         if (errMsg != null) {
             output.print(errMsg);

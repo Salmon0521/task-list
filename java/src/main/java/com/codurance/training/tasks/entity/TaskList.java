@@ -1,33 +1,43 @@
 package com.codurance.training.tasks.entity;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TaskList {
     private static long lastId = 0;
-    private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
+    private final List<Project> projects = new LinkedList<>();
 
     public Map<String, List<Task>> getTasks() {
+        Map<String, List<Task>> tasks = new LinkedHashMap<>();
+        for (Project project : projects) {
+            tasks.put(project.getName(), project.getTasks());
+        }
         return tasks;
     }
 
-    public List<Task> getProject(String project) {
-        return tasks.get(project);
+    public List<Task> getProject(String projectName) {
+        Project project = projects.stream().filter(p -> p.getName().equals(projectName)).findFirst().orElse(null);
+        return project != null ? project.getTasks() : null;
     }
 
-    public void addProject(String project) {
-        tasks.put(project, new java.util.ArrayList<>());
+    public void addProject(String projectName) {
+        if (projects.stream().noneMatch(p -> p.getName().equals(projectName))) {
+            projects.add(new Project(projectName));
+        }
     }
 
-    public void addTask(String project, String description) {
+    public void addTask(String projectName, String description) {
         Task task = new Task(nextId(), description, false);
-        tasks.get(project).add(task);
+        for (Project project : projects) {
+            if (project.getName().equals(projectName)) {
+                project.addTask(task);
+                return;
+            }
+        }
     }
 
     public Boolean setTaskDone(int taskId, boolean check) {
-        for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
-            for (Task task : project.getValue()) {
+        for (Project project : projects) {
+            for (Task task : project.getTasks()) {
                 if (task.getId() == taskId) {
                     task.setDone(check);
                     return true;
@@ -35,19 +45,6 @@ public class TaskList {
             }
         }
         return false;
-    }
-
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
-            result.append(project.getKey()).append(System.lineSeparator());
-            for (Task task : project.getValue()) {
-                String msg = String.format("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
-                result.append(msg);
-            }
-            result.append(System.lineSeparator());
-        }
-        return result.toString();
     }
 
     private static long nextId() {

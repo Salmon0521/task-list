@@ -8,8 +8,10 @@ import com.codurance.training.tasks.usecase.command.Command;
 import com.codurance.training.tasks.usecase.command.ErrorCommand;
 
 public class CommandFactory {
+    private CommandFactory() {
+    }
 
-    public Command createCommand(String commandline) {
+    public static Command createCommand(String commandline) {
         String[] commandRest = commandline.split(" ", 2);
         String command = commandRest[0];
         switch (command) {
