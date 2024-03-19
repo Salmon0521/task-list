@@ -1,6 +1,6 @@
-package com.codurance.training.tasks.command;
+package com.codurance.training.tasks.usecase.command;
 
-import com.codurance.training.tasks.tasklist.TaskList;
+import com.codurance.training.tasks.entity.TaskList;
 
 public class CheckCommand implements Command {
     protected boolean check;

@@ -1,11 +1,11 @@
-package com.codurance.training.tasks.command.factory;
+package com.codurance.training.tasks.usecase;
 
-import com.codurance.training.tasks.command.AddCommand;
-import com.codurance.training.tasks.command.CheckCommand;
-import com.codurance.training.tasks.command.HelpCommand;
-import com.codurance.training.tasks.command.ShowCommand;
-import com.codurance.training.tasks.command.Command;
-import com.codurance.training.tasks.command.ErrorCommand;
+import com.codurance.training.tasks.usecase.command.AddCommand;
+import com.codurance.training.tasks.usecase.command.CheckCommand;
+import com.codurance.training.tasks.usecase.command.HelpCommand;
+import com.codurance.training.tasks.usecase.command.ShowCommand;
+import com.codurance.training.tasks.usecase.command.Command;
+import com.codurance.training.tasks.usecase.command.ErrorCommand;
 
 public class CommandFactory {
 

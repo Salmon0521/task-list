@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.tasklist;
+package com.codurance.training.tasks.entity;
 
 import java.util.LinkedHashMap;
 import java.util.List;

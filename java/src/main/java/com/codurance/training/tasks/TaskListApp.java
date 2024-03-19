@@ -1,11 +1,12 @@
 package com.codurance.training.tasks;
 
-import com.codurance.training.tasks.command.Command;
-import com.codurance.training.tasks.command.factory.CommandFactory;
-import com.codurance.training.tasks.tasklist.TaskList;
+import com.codurance.training.tasks.io.Input;
+import com.codurance.training.tasks.io.Output;
+import com.codurance.training.tasks.usecase.command.Command;
+import com.codurance.training.tasks.usecase.CommandFactory;
+import com.codurance.training.tasks.entity.TaskList;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
@@ -14,8 +15,8 @@ public final class TaskListApp implements Runnable {
 
     private final TaskList taskList = new TaskList();
     private final CommandFactory commandFactory = new CommandFactory();
-    private final BufferedReader in;
-    private final PrintWriter out;
+    private final Input input;
+    private final Output output;
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -24,20 +25,14 @@ public final class TaskListApp implements Runnable {
     }
 
     public TaskListApp(BufferedReader reader, PrintWriter writer) {
-        this.in = reader;
-        this.out = writer;
+        this.input = new Input(reader);
+        this.output = new Output(writer);
     }
 
     public void run() {
         while (true) {
-            out.print("> ");
-            out.flush();
-            String command;
-            try {
-                command = in.readLine();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            output.prompt();
+            String command = input.readLine();
             if (command.equals(QUIT)) {
                 break;
             }
@@ -49,7 +44,7 @@ public final class TaskListApp implements Runnable {
         Command command = commandFactory.createCommand(commandline);
         String errMsg = command.execute(taskList);
         if (errMsg != null) {
-            out.print(errMsg);
+            output.print(errMsg);
         }
     }
 
