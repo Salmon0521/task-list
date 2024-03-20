@@ -3,7 +3,7 @@ package com.codurance.training.tasks;
 import com.codurance.training.tasks.io.Input;
 import com.codurance.training.tasks.io.Output;
 import com.codurance.training.tasks.usecase.command.Command;
-import com.codurance.training.tasks.usecase.CommandFactory;
+import com.codurance.training.tasks.adapter.CommandFactory;
 import com.codurance.training.tasks.entity.TaskList;
 
 import java.io.BufferedReader;
