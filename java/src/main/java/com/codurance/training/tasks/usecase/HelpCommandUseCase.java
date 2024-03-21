@@ -1,9 +1,9 @@
-package com.codurance.training.tasks.usecase.command;
+package com.codurance.training.tasks.usecase;
 
 
-public class HelpCommand implements Command {
+public class HelpCommandUseCase implements CommandUseCase {
     @Override
-    public String execute() {
+    public String execute(String commandLine) {
         return "Commands:" +
                 System.lineSeparator() +
                 "  show" +

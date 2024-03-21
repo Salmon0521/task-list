@@ -1,2 +1,5 @@
-package com.codurance.training.tasks.adapter;public interface Controller {
+package com.codurance.training.tasks.adapter.controller;
+
+public interface Controller {
+    String execute(String commandLine);
 }

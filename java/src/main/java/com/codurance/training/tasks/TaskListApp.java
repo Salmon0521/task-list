@@ -1,10 +1,9 @@
 package com.codurance.training.tasks;
 
+import com.codurance.training.tasks.adapter.ControllerFactory;
+import com.codurance.training.tasks.adapter.controller.Controller;
 import com.codurance.training.tasks.io.Input;
 import com.codurance.training.tasks.io.Output;
-import com.codurance.training.tasks.usecase.command.Command;
-import com.codurance.training.tasks.usecase.CommandFactory;
-import com.codurance.training.tasks.entity.TaskList;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -38,8 +37,8 @@ public final class TaskListApp implements Runnable {
     }
 
     private void execute(String commandline){
-        Command command = CommandFactory.createCommand(commandline);
-        String errMsg = command.execute();
+        Controller controller = ControllerFactory.createController(commandline);
+        String errMsg = controller.execute(commandline);
         if (errMsg != null) {
             output.print(errMsg);
         }

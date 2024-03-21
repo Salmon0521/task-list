@@ -1,23 +1,21 @@
-package com.codurance.training.tasks.usecase.command;
+package com.codurance.training.tasks.usecase;
 
 import com.codurance.training.tasks.entity.Task;
 import com.codurance.training.tasks.entity.TaskList;
 
 import java.util.List;
 
-public class AddCommand implements Command {
+public class AddCommandUseCase implements CommandUseCase {
     private final String type;
     private final String commandline;
 
-    public AddCommand(String commandLine) {
-        String[] commandRest = commandLine.split(" ", 2);
-        String command = commandRest[0];
-        this.type = command;
-        this.commandline = commandRest[1];
+    public AddCommandUseCase(String type, String commandLine) {
+        this.type = type;
+        this.commandline = commandLine;
     }
 
     @Override
-    public String execute() {
+    public String execute(String commandLine) {
         return add(TaskList.getInstance());
     }
 
