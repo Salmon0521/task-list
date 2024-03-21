@@ -4,5 +4,5 @@ import com.codurance.training.tasks.entity.TaskList;
 
 public interface Command {
 
-    String execute(TaskList tasks);
+    String execute();
 }

@@ -12,8 +12,6 @@ import java.io.PrintWriter;
 
 public final class TaskListApp implements Runnable {
     private static final String QUIT = "quit";
-
-    private final TaskList taskList = new TaskList();
     private final Input input;
     private final Output output;
 
@@ -41,7 +39,7 @@ public final class TaskListApp implements Runnable {
 
     private void execute(String commandline){
         Command command = CommandFactory.createCommand(commandline);
-        String errMsg = command.execute(taskList);
+        String errMsg = command.execute();
         if (errMsg != null) {
             output.print(errMsg);
         }

@@ -1,7 +1,5 @@
 package com.codurance.training.tasks.usecase.command;
 
-import com.codurance.training.tasks.entity.TaskList;
-
 public class ErrorCommand implements Command {
     private final String commandline;
 
@@ -10,11 +8,7 @@ public class ErrorCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList taskList) {
-        return error();
-    }
-
-    private String error() {
+    public String execute() {
         return String.format("I don't know what the command \"%s\" is.", commandline) + System.lineSeparator();
     }
 

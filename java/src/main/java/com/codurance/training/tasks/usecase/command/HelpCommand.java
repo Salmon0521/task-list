@@ -1,14 +1,9 @@
 package com.codurance.training.tasks.usecase.command;
 
-import com.codurance.training.tasks.entity.TaskList;
 
 public class HelpCommand implements Command {
     @Override
-    public String execute(TaskList taskList) {
-        return help();
-    }
-
-    private String help() {
+    public String execute() {
         return "Commands:" +
                 System.lineSeparator() +
                 "  show" +

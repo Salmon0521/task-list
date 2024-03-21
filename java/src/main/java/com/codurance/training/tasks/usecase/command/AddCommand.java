@@ -17,8 +17,8 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList taskList) {
-        return add(taskList);
+    public String execute() {
+        return add(TaskList.getInstance());
     }
 
     private String add(TaskList taskList) {

@@ -8,12 +8,8 @@ import java.util.Map;
 
 public class ShowCommand implements Command {
     @Override
-    public String execute(TaskList taskList) {
-        return show(taskList);
-    }
-
-    private String show(TaskList taskList) {
-        Map<String, List<Task>> tasks = taskList.getTasks();
+    public String execute() {
+        Map<String, List<Task>> tasks = TaskList.getInstance().getTasks();
         StringBuilder result = new StringBuilder();
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             result.append(project.getKey()).append(System.lineSeparator());

@@ -5,6 +5,17 @@ import java.util.*;
 public class TaskList {
     private static long lastId = 0;
     private final List<Project> projects = new LinkedList<>();
+    private static TaskList instance;
+
+    private TaskList() {}
+
+    public static TaskList getInstance() {
+        if (instance == null) {
+            instance = new TaskList();
+        }
+        return instance;
+    }
+
 
     public Map<String, List<Task>> getTasks() {
         Map<String, List<Task>> tasks = new LinkedHashMap<>();

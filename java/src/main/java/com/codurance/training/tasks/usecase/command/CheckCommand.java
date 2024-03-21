@@ -16,8 +16,8 @@ public class CheckCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList tasks) {
-        return taskCheck(tasks);
+    public String execute() {
+        return taskCheck(TaskList.getInstance());
     }
 
     private String taskCheck(TaskList taskList) {
