@@ -1,4 +1,4 @@
-package com.codurance.training.tasks.adapter;
+package com.codurance.training.tasks.usecase;
 
 import com.codurance.training.tasks.usecase.command.AddCommand;
 import com.codurance.training.tasks.usecase.command.CheckCommand;
