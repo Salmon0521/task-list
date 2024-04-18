@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Project {
-    private String name;
+    private ProjectName name;
     private List<Task> tasks;
 
-    public Project(String name) {
+    public Project(ProjectName name) {
         this.name = name;
         this.tasks = new ArrayList<>();
     }
 
-    public String getName() {
+    public ProjectName getName() {
         return name;
     }
 

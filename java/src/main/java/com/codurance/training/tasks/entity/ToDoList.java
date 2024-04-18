@@ -2,16 +2,16 @@ package com.codurance.training.tasks.entity;
 
 import java.util.*;
 
-public class TaskList {
+public class ToDoList {
     private static long lastId = 0;
     private final List<Project> projects = new LinkedList<>();
-    private static TaskList instance;
+    private static ToDoList instance;
 
-    private TaskList() {}
+    private ToDoList() {}
 
-    public static TaskList getInstance() {
+    public static ToDoList getInstance() {
         if (instance == null) {
-            instance = new TaskList();
+            instance = new ToDoList();
         }
         return instance;
     }
@@ -20,24 +20,24 @@ public class TaskList {
     public Map<String, List<Task>> getTasks() {
         Map<String, List<Task>> tasks = new LinkedHashMap<>();
         for (Project project : projects) {
-            tasks.put(project.getName(), project.getTasks());
+            tasks.put(project.getName().toString(), project.getTasks());
         }
         return tasks;
     }
 
-    public List<Task> getProject(String projectName) {
+    public List<Task> getProject(ProjectName projectName) {
         Project project = projects.stream().filter(p -> p.getName().equals(projectName)).findFirst().orElse(null);
         return project != null ? project.getTasks() : null;
     }
 
-    public void addProject(String projectName) {
+    public void addProject(ProjectName projectName) {
         if (projects.stream().noneMatch(p -> p.getName().equals(projectName))) {
             projects.add(new Project(projectName));
         }
     }
 
-    public void addTask(String projectName, String description) {
-        Task task = new Task(nextId(), description, false);
+    public void addTask(ProjectName projectName, String description) {
+        Task task = new Task(TaskId.of(nextId()), description, false);
         for (Project project : projects) {
             if (project.getName().equals(projectName)) {
                 project.addTask(task);
@@ -46,10 +46,10 @@ public class TaskList {
         }
     }
 
-    public Boolean setTaskDone(int taskId, boolean check) {
+    public Boolean setTaskDone(TaskId taskId, boolean check) {
         for (Project project : projects) {
             for (Task task : project.getTasks()) {
-                if (task.getId() == taskId) {
+                if (task.getId().equals(taskId)) {
                     task.setDone(check);
                     return true;
                 }
