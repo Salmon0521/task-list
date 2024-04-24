@@ -1,15 +1,16 @@
 package com.codurance.training.tasks.entity;
 
-import java.util.ArrayList;
+import tw.teddysoft.ezddd.core.entity.Entity;
+
 import java.util.List;
 
-public class Project {
+public class Project implements Entity<ProjectName> {
     private ProjectName name;
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
-    public Project(ProjectName name) {
+    public Project(ProjectName name, List<Task> tasks) {
         this.name = name;
-        this.tasks = new ArrayList<>();
+        this.tasks = tasks;
     }
 
     public ProjectName getName() {
@@ -20,7 +21,12 @@ public class Project {
         return tasks;
     }
 
-    public void addTask(Task task) {
-        tasks.add(task);
+    public void addTask(TaskId taskId, String description, boolean done) {
+        tasks.add(new Task(taskId, description, done));
+    }
+
+    @Override
+    public ProjectName getId() {
+        return name;
     }
 }

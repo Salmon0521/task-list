@@ -1,9 +1,11 @@
 package com.codurance.training.tasks.usecase;
 
 
+import com.codurance.training.tasks.entity.ToDoList;
+
 public class HelpCommandUseCase implements CommandUseCase {
     @Override
-    public String execute(String commandLine) {
+    public String execute(ToDoList toDoList, String commandLine) {
         return "Commands:" +
                 System.lineSeparator() +
                 "  show" +

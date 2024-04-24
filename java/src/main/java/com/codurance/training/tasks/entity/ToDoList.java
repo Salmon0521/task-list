@@ -1,46 +1,57 @@
 package com.codurance.training.tasks.entity;
 
+import tw.teddysoft.ezddd.core.entity.AggregateRoot;
+import tw.teddysoft.ezddd.core.entity.DomainEvent;
+
 import java.util.*;
 
-public class ToDoList {
+public class ToDoList extends AggregateRoot<ToDoListId, DomainEvent> {
+
+    private final ToDoListId id;
+    private final List<Project> projects;
+
     private static long lastId = 0;
-    private final List<Project> projects = new LinkedList<>();
-    private static ToDoList instance;
 
-    private ToDoList() {}
-
-    public static ToDoList getInstance() {
-        if (instance == null) {
-            instance = new ToDoList();
-        }
-        return instance;
+    public ToDoList(ToDoListId id) {
+        this.id = id;
+        this.projects  = new LinkedList<>();
     }
 
-
-    public Map<String, List<Task>> getTasks() {
-        Map<String, List<Task>> tasks = new LinkedHashMap<>();
-        for (Project project : projects) {
-            tasks.put(project.getName().toString(), project.getTasks());
-        }
-        return tasks;
+    @Override
+    public ToDoListId getId() {
+        return id;
     }
 
-    public List<Task> getProject(ProjectName projectName) {
-        Project project = projects.stream().filter(p -> p.getName().equals(projectName)).findFirst().orElse(null);
-        return project != null ? project.getTasks() : null;
+    public List<Project> getProjects() {
+        return projects.stream()
+                .map(project -> (Project)new ReadOnlyProject(project.getName(), project.getTasks()))
+                .toList();
+    }
+
+    public List<Task> getTasks(ProjectName projectName) {
+        Project project = projects.stream()
+                .filter(p -> p.getName().equals(projectName))
+                .findFirst()
+                .orElse(null);
+        if (project == null) {
+            return null;
+        }
+
+        return project.getTasks().stream()
+                .map(task -> (Task)new ReadOnlyTask(task.getId(), task.getDescription(), task.isDone()))
+                .toList();
     }
 
     public void addProject(ProjectName projectName) {
         if (projects.stream().noneMatch(p -> p.getName().equals(projectName))) {
-            projects.add(new Project(projectName));
+            projects.add(new Project(projectName, new ArrayList<>()));
         }
     }
 
     public void addTask(ProjectName projectName, String description) {
-        Task task = new Task(TaskId.of(nextId()), description, false);
         for (Project project : projects) {
             if (project.getName().equals(projectName)) {
-                project.addTask(task);
+                project.addTask(TaskId.of(nextId()), description, false);
                 return;
             }
         }

@@ -16,8 +16,8 @@ public class AddCommandUseCase implements CommandUseCase {
     }
 
     @Override
-    public String execute(String commandLine) {
-        return add(ToDoList.getInstance());
+    public String execute(ToDoList toDoList, String commandLine) {
+        return add(toDoList);
     }
 
     private String add(ToDoList toDoList) {
@@ -35,7 +35,7 @@ public class AddCommandUseCase implements CommandUseCase {
     }
 
     private String addTask(String project, String description, ToDoList toDoList) {
-        List<Task> projectTasks = toDoList.getProject(ProjectName.of(project));
+        List<Task> projectTasks = toDoList.getTasks(ProjectName.of(project));
         if (projectTasks == null) {
             return String.format("Could not find a project with the name \"%s\".", project) + System.lineSeparator();
         }

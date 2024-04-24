@@ -13,8 +13,7 @@ public class CheckCommandUseCase implements CommandUseCase {
     }
 
     @Override
-    public String execute(String commandLine) {
-        ToDoList toDoList = ToDoList.getInstance();
+    public String execute(ToDoList toDoList, String commandLine) {
         if (! toDoList.setTaskDone(TaskId.of(id), check)) {
             return String.format("Could not find a task with an ID of %d.", id) + System.lineSeparator();
         }
