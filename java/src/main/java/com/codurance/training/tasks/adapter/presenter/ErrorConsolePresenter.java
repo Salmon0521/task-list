@@ -1,7 +1,7 @@
 package com.codurance.training.tasks.adapter.presenter;
 
 import com.codurance.training.tasks.io.Output;
-import com.codurance.training.tasks.usecase.port.out.error.ErrorPresenter;
+import com.codurance.training.tasks.usecase.port.out.todolist.error.ErrorPresenter;
 
 public class ErrorConsolePresenter implements ErrorPresenter {
     private final Output out;

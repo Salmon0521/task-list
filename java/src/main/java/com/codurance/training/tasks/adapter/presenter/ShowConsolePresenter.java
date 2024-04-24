@@ -4,7 +4,7 @@ import com.codurance.training.tasks.io.Output;
 import com.codurance.training.tasks.usecase.port.in.todolist.show.ProjectDto;
 import com.codurance.training.tasks.usecase.port.in.todolist.show.TaskDto;
 import com.codurance.training.tasks.usecase.port.in.todolist.show.ToDoListDto;
-import com.codurance.training.tasks.usecase.port.out.show.ShowPresenter;
+import com.codurance.training.tasks.usecase.port.out.todolist.show.ShowPresenter;
 
 public class ShowConsolePresenter implements ShowPresenter {
 
