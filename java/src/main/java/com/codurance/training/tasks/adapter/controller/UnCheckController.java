@@ -1,15 +1,21 @@
 package com.codurance.training.tasks.adapter.controller;
 
+import com.codurance.training.tasks.adapter.presenter.ErrorConsolePresenter;
 import com.codurance.training.tasks.entity.ToDoList;
 import com.codurance.training.tasks.io.Output;
-import com.codurance.training.tasks.usecase.CheckCommandUseCase;
-import com.codurance.training.tasks.usecase.CommandUseCase;
+import com.codurance.training.tasks.usecase.port.in.todolist.checktask.CheckTaskInput;
+import com.codurance.training.tasks.usecase.port.in.todolist.checktask.CheckTaskOutput;
+import com.codurance.training.tasks.usecase.service.CheckTaskService;
 
 public class UnCheckController implements Controller{
     @Override
     public String execute(ToDoList toDoList, String commandLine, Output out) {
         String[] args = commandLine.split(" ", 2);
-        CommandUseCase checkCommandUseCase = new CheckCommandUseCase(args[1], false);
-        return checkCommandUseCase.execute(toDoList, commandLine);
+        CheckTaskService checkTaskService = new CheckTaskService(toDoList);
+        CheckTaskInput input = new CheckTaskInput(args[1], false);
+        CheckTaskOutput output = checkTaskService.execute(input);
+        ErrorConsolePresenter presenter = new ErrorConsolePresenter(out);
+        presenter.present(output.getErrorMessage());
+        return "";
     }
 }
