@@ -10,6 +10,6 @@ public class ErrorOutput implements UseCaseOutput {
     }
 
     public String getErrorMessage() {
-        return errorMessage;
+        return String.format("I don't know what the command \"%s\" is.", errorMessage) + System.lineSeparator();
     }
 }
