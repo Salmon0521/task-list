@@ -7,7 +7,6 @@ import com.codurance.training.tasks.usecase.port.in.project.AddProjectInput;
 import com.codurance.training.tasks.usecase.port.in.project.AddProjectUseCase;
 
 public class AddProjectService implements AddProjectUseCase {
-
     private final ToDoList toDoList;
 
     public AddProjectService(ToDoList toDoList) {

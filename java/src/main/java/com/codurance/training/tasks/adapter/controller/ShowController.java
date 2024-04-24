@@ -9,12 +9,11 @@ import com.codurance.training.tasks.usecase.service.ShowService;
 
 public class ShowController implements Controller{
     @Override
-    public String execute(ToDoList toDoList, String commandLine, Output out) {
+    public void execute(ToDoList toDoList, String commandLine, Output out) {
         ShowService showService = new ShowService(toDoList);
         ShowInput input = new ShowInput();
         ShowOutput showOutput = showService.execute(input);
         ShowConsolePresenter presenter = new ShowConsolePresenter(out);
         presenter.present(showOutput.getToDoListDto());
-        return "";
     }
 }

@@ -8,11 +8,10 @@ import com.codurance.training.tasks.usecase.service.AddProjectService;
 
 public class AddProjectController implements Controller {
     @Override
-    public String execute(ToDoList toDoList, String commandLine, Output out) {
+    public void execute(ToDoList toDoList, String commandLine, Output out) {
         String[] args = commandLine.split(" ", 3);
         UseCase addProjectService = new AddProjectService(toDoList);
         AddProjectInput input = new AddProjectInput(args[2]);
         addProjectService.execute(input);
-        return "";
     }
 }

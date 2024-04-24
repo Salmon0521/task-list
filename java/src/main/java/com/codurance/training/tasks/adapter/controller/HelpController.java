@@ -9,11 +9,10 @@ import com.codurance.training.tasks.usecase.service.HelpService;
 
 public class HelpController implements Controller{
     @Override
-    public String execute(ToDoList toDoList, String commandLine, Output out) {
+    public void execute(ToDoList toDoList, String commandLine, Output out) {
         HelpService helpService = new HelpService();
         HelpOutput output = helpService.execute(new UseCaseInput.NullInput());
         HelpConsolePresenter presenter = new HelpConsolePresenter(out);
         presenter.present(output.getHelpDto());
-        return "";
     }
 }

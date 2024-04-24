@@ -6,7 +6,6 @@ import com.codurance.training.tasks.usecase.port.in.todolist.help.HelpOutput;
 import com.codurance.training.tasks.usecase.port.in.todolist.help.HelpUseCase;
 
 public class HelpService implements HelpUseCase {
-
     public HelpService() {}
 
     @Override

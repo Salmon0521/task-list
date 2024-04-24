@@ -9,13 +9,12 @@ import com.codurance.training.tasks.usecase.service.CheckTaskService;
 
 public class UnCheckController implements Controller{
     @Override
-    public String execute(ToDoList toDoList, String commandLine, Output out) {
+    public void execute(ToDoList toDoList, String commandLine, Output out) {
         String[] args = commandLine.split(" ", 2);
         CheckTaskService checkTaskService = new CheckTaskService(toDoList);
         CheckTaskInput input = new CheckTaskInput(args[1], false);
         CheckTaskOutput output = checkTaskService.execute(input);
         ErrorConsolePresenter presenter = new ErrorConsolePresenter(out);
         presenter.present(output.getErrorMessage());
-        return "";
     }
 }
