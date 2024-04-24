@@ -41,7 +41,7 @@ public final class TaskListApp implements Runnable {
 
     private void execute(String commandline){
         Controller controller = ControllerFactory.createController(commandline);
-        String errMsg = controller.execute(toDoList, commandline);
+        String errMsg = controller.execute(toDoList, commandline, output);
         if (errMsg != null) {
             output.print(errMsg);
         }
