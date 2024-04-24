@@ -13,7 +13,13 @@ public class ControllerFactory {
             case "show":
                 return new ShowController();
             case "add":
-                return new AddController();
+                String[] subCommandRest = commandRest[1].split(" ", 2);
+                String subCommand = subCommandRest[0];
+                if (subCommand.equals("task")) {
+                    return new AddTaskController();
+                } else if (subCommand.equals("project")) {
+                    return new AddProjectController();
+                }
             case "check":
                 return new CheckController();
             case "uncheck":

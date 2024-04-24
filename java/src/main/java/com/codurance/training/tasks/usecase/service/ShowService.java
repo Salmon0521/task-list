@@ -8,6 +8,7 @@ import com.codurance.training.tasks.usecase.port.ToDoListMapper;
 
 public class ShowService implements ShowUseCase {
     private final ToDoList toDoList;
+
     public ShowService(ToDoList toDoList) {
         this.toDoList = toDoList;
     }

@@ -1,6 +1,6 @@
 package com.codurance.training.tasks.usecase.port.in.todolist.show;
 
-import com.codurance.training.tasks.usecase.port.out.UseCaseOutput;
+import com.codurance.training.tasks.usecase.port.in.UseCaseOutput;
 
 public class ShowOutput implements UseCaseOutput {
     private ToDoListDto toDoListDto;
